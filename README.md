@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="public/icons/log.png" width="160" alt="IAIN Datuk Laksemana Bengkalis">
+  <img src="public/icons/logo.png" width="160" alt="IAIN Datuk Laksemana Bengkalis">
 </p>
 
 <h1 align="center">Landing Page Kampus IAIN Datuk Laksemana Bengkalis</h1>
