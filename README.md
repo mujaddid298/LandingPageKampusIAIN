@@ -34,28 +34,21 @@ Website ini dibangun dengan pendekatan **modern UI**, **responsif**, dan **mudah
 
 ### 🏛️ Profil Kampus
 - Sejarah kampus
-- Visi dan misi
-- Struktur organisasi
 - Profil pimpinan dan unit kerja
 
 ### 📝 Formulir Otomatis
 - Formulir online (pendaftaran, pengajuan, dll)
-- Validasi data
-- Penyimpanan otomatis ke database
+- Download formulir mudah
 - Mudah dikembangkan untuk kebutuhan akademik
 
 ### 🗓️ Kalender Akreditasi
-- Jadwal kegiatan akreditasi
-- Informasi periode & status
 - Tampilan kalender interaktif
 
 ### 🎓 KIP (Kartu Indonesia Pintar)
-- Informasi program KIP Kuliah
-- Persyaratan dan ketentuan
 - Pengumuman terkait KIP
 
 ### 📊 Akreditasi Program Studi
-- Daftar program studi
+- Daftar pengelola program studi
 - Status dan peringkat akreditasi
 - Preview sertifikat akreditasi (PDF)
 
