@@ -6,13 +6,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Kampus Melayu</title>
 
-    {{-- Tailwind via Vite --}}
-    @vite('resources/css/app.css')
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
 
-    {{-- Alpine JS (WAJIB) --}}
+    {{-- 
     <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <script defer src="https://unpkg.com/@alpinejs/intersect@3.x.x/dist/cdn.min.js"></script> --}}
 
-    {{-- Anti flicker --}}
     <style>
         [x-cloak] {
             display: none !important
@@ -95,12 +94,19 @@
         <div class="max-w-7xl mx-auto px-4">
 
             <h2 class="text-3xl md:text-4xl font-bold text-[#12854A] text-center mb-12">
-                Pengelola Program Studi
+                Pengelola Program Studi Sarjana
                 <span class="block w-20 h-1 bg-[#E7BB00] mx-auto mt-4 rounded-full"></span>
             </h2>
 
-            <!-- PEMBUNGKUS CARD -->
-            <div class="flex gap-6  pb-4 ">
+            <!-- CARD GRID RESPONSIVE -->
+            <div
+                class="grid gap-6
+            grid-cols-1
+            sm:grid-cols-2
+            md:grid-cols-3
+            lg:grid-cols-4
+            justify-items-center">
+
 
                 @foreach ($peprodi as $item)
                     <x-peprodi name="{{ $item->name }}" prodi="{{ $item->prodi }}" nowa="{{ $item->no_wa }}"
@@ -111,6 +117,7 @@
 
         </div>
     </section>
+
 
 
     <!-- ================= FOOTER ================= -->

@@ -44,55 +44,144 @@
 
                 <!-- Desktop Menu -->
                 <div class="hidden md:flex items-center space-x-6">
-                    <a href="#profil" class="text-gray-700 font-medium hover:text-[#E7BB00] transition">
+                    <a href="{{ route('beranda') }}"
+                        class="relative font-medium text-gray-700 transition hover:text-[#E7BB00]
+                            after:absolute after:left-1/2 after:-bottom-1
+                            after:h-[2px] after:w-0 after:bg-gradient-to-r after:from-[#E7BB00] after:to-yellow-400
+                            after:transition-all after:duration-300 after:-translate-x-1/2
+                            hover:after:w-full"
+                        {{ request()->routeIs('beranda') ? 'text-[#E7BB00]' : 'text-gray-700 hover:text-[#E7BB00]' }}>
+                        Beranda
+                    </a>
+
+                    <a href="#profil"
+                        class="relative font-medium text-gray-700 transition hover:text-[#E7BB00]
+                            after:absolute after:left-1/2 after:-bottom-1
+                            after:h-[2px] after:w-0 after:bg-gradient-to-r after:from-[#E7BB00] after:to-yellow-400
+                            after:transition-all after:duration-300 after:-translate-x-1/2
+                            hover:after:w-full">
+
                         Profil
                     </a>
+
+
+
+
                     <a href="{{ route('pengumuman') }}"
-                        class="text-gray-700 font-medium hover:text-[#E7BB00] transition">
+                        class="relative font-medium text-gray-700 transition hover:text-[#E7BB00]
+                            after:absolute after:left-1/2 after:-bottom-1
+                            after:h-[2px] after:w-0 after:bg-gradient-to-r after:from-[#E7BB00] after:to-yellow-400
+                            after:transition-all after:duration-300 after:-translate-x-1/2
+                            hover:after:w-full"
+                        {{ request()->routeIs('pengumuman') ? 'text-[#E7BB00]' : 'text-gray-700 hover:text-[#E7BB00]' }}>
                         Pengumuman
                     </a>
-                    <div class="relative group">
-                        <a href="#"
-                            class="flex items-center gap-1 text-gray-700 font-medium hover:text-[#E7BB00] transition">
-                            Formulir
-                            <svg class="w-4 h-4 mt-1" fill="none" stroke="currentColor" stroke-width="2"
-                                viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
-                            </svg>
-                        </a>
 
-                        <!-- Dropdown -->
-                        <div
-                            class="absolute left-0 mt-2 w-52 bg-white rounded-xl shadow-lg
-                            opacity-0 invisible group-hover:opacity-100 group-hover:visible
-                            transition-all duration-200 z-50">
-
-                            <a href="{{ route('pengumuman') }}"
-                                class="block px-4 py-3 text-sm text-gray-700 hover:bg-gray-100 rounded-t-xl">
-                                Surat Keterangan Aktif Kuliah
-                            </a>
-
-                            <a href="#" class="block px-4 py-3 text-sm text-gray-700 hover:bg-gray-100">
-                                Surat Rekomendasi Penelitian Riset
-                            </a>
-
-                            <a href="#"
-                                class="block px-4 py-3 text-sm text-gray-700 hover:bg-gray-100 rounded-b-xl">
-                                Surat Keterangan Lulus
-                            </a>
-                        </div>
-                    </div>
-                    <a href="{{ route('pengumuman') }}"
-                        class="text-gray-700 font-medium hover:text-[#E7BB00] transition">
+                    <a href="{{ route('akreditasi') }}"
+                        class="relative font-medium text-gray-700 transition hover:text-[#E7BB00]
+                            after:absolute after:left-1/2 after:-bottom-1
+                            after:h-[2px] after:w-0 after:bg-gradient-to-r after:from-[#E7BB00] after:to-yellow-400
+                            after:transition-all after:duration-300 after:-translate-x-1/2
+                            hover:after:w-full"
+                        {{ request()->routeIs('akreditasi') ? 'text-[#E7BB00]' : 'text-gray-700 hover:text-[#E7BB00]' }}>
                         Akreditasi
                     </a>
+
+
+                    {{-- <x-navbar.mega-dropdown title="Akreditasi" :menus="[
+                        [
+                            ['label' => 'Beasiswa', 'url' => '#'],
+                            ['label' => 'UKM & Ormawa', 'url' => '#'],
+                            ['label' => 'Prestasi', 'url' => '#'],
+                        ],
+                        [
+                            ['label' => 'Pengabdian', 'url' => '#'],
+                            ['label' => 'Kegiatan Sosial', 'url' => '#'],
+                            ['label' => 'Donasi', 'url' => '#'],
+                        ],
+                        [
+                            ['label' => 'Berita', 'url' => '#'],
+                            ['label' => 'Agenda', 'url' => '#'],
+                            ['label' => 'Dokumentasi', 'url' => '#'],
+                        ],
+                    ]" /> --}}
+
+
+<div class="relative group">
+    <a href="#"
+        class="relative flex items-center gap-1 font-medium text-gray-700 transition hover:text-[#E7BB00]
+            after:absolute after:left-1/2 after:-bottom-1
+            after:h-[2px] after:w-0 after:bg-gradient-to-r after:from-[#E7BB00] after:to-yellow-400
+            after:transition-all after:duration-300 after:-translate-x-1/2
+            group-hover:after:w-full">
+        Formulir
+
+        <svg class="w-4 h-4 mt-1 transition-transform duration-300 group-hover:rotate-180"
+            fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
+        </svg>
+    </a>
+
+    <!-- Dropdown -->
+    <div
+        class="absolute left-1/2 top-full mt-2 w-80 -translate-x-1/2
+                bg-white rounded-xl shadow-xl
+                opacity-0 invisible translate-y-3 p-2
+                group-hover:opacity-100 group-hover:visible group-hover:translate-y-0
+                transition-all duration-300 ease-out z-50">
+
+        <a href="{{ route('formulir.aktifkuliah') }}"
+            class="flex items-center gap-3 px-4 py-3 text-sm text-gray-700 hover:bg-yellow-50 hover:text-[#E7BB00] rounded-lg transition group/item">
+            <span class="flex items-center justify-center w-8 h-8 rounded-lg bg-yellow-50 text-yellow-500 group-hover/item:bg-yellow-100 transition">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                </svg>
+            </span>
+            <span>Surat Keterangan Aktif Kuliah</span>
+        </a>
+
+        <a href="{{ route('formulir.formpenelitian') }}"
+            class="flex items-center gap-3 px-4 py-3 text-sm text-gray-700 hover:bg-yellow-50 hover:text-[#E7BB00] rounded-lg transition group/item">
+            <span class="flex items-center justify-center w-8 h-8 rounded-lg bg-yellow-50 text-yellow-500 group-hover/item:bg-yellow-100 transition">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4" />
+                </svg>
+            </span>
+            <span>Surat Rekomendasi Penelitian</span>
+        </a>
+
+        <a href="{{ route('formulir.ketlulus') }}"
+            class="flex items-center gap-3 px-4 py-3 text-sm text-gray-700 hover:bg-yellow-50 hover:text-[#E7BB00] rounded-lg transition group/item">
+            <span class="flex items-center justify-center w-8 h-8 rounded-lg bg-yellow-50 text-yellow-500 group-hover/item:bg-yellow-100 transition">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+            </span>
+            <span>Surat Keterangan Lulus</span>
+        </a>
+    </div>
+</div>
+
+
+                    {{-- <a href="#"
+                        class="relative font-medium text-gray-700 transition hover:text-[#E7BB00]
+                            after:absolute after:left-1/2 after:-bottom-1
+                            after:h-[2px] after:w-0 after:bg-gradient-to-r after:from-[#E7BB00] after:to-yellow-400
+                            after:transition-all after:duration-300 after:-translate-x-1/2
+                            hover:after:w-full"
+                        {{ request()->routeIs('pengumuman') ? 'text-[#E7BB00]' : 'text-gray-700 hover:text-[#E7BB00]' }}">
+                        Akreditasi
+                    </a> --}}
+
                     <a href="{{ route('pengumuman') }}"
-                        class="text-gray-700 font-medium hover:text-[#E7BB00] transition">
-                        KIP
+                        class="relative font-medium text-gray-700 transition hover:text-[#E7BB00]
+                            after:absolute after:left-1/2 after:-bottom-1
+                            after:h-[2px] after:w-0 after:bg-gradient-to-r after:from-[#E7BB00] after:to-yellow-400
+                            after:transition-all after:duration-300 after:-translate-x-1/2
+                            hover:after:w-full"
+                        {{ request()->routeIs('pengumuman') ? 'text-[#E7BB00]' : 'text-gray-700 hover:text-[#E7BB00]' }}>
+                        KIP Kuliah
                     </a>
-
-
-
                 </div>
 
                 <!-- Mobile Hamburger -->
@@ -111,10 +200,45 @@
             <a href="{{ route('profil') }}" class="block px-6 py-4 text-gray-700 hover:bg-gray-100">
                 Profil
             </a>
+
             <a href="{{ route('pengumuman') }}" class="block px-6 py-4 text-gray-700 hover:bg-gray-100">
                 Pengumuman
             </a>
+
+            <!-- FORMULIR (Accordion Mobile) -->
+            <div x-data="{ open: false }" class="border-t">
+                <button @click="open = !open"
+                    class="w-full flex justify-between items-center px-6 py-4 text-gray-700 hover:bg-gray-100">
+                    <span>Formulir</span>
+                    <svg class="w-4 h-4 transition-transform" :class="open && 'rotate-180'" fill="none"
+                        stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
+                    </svg>
+                </button>
+
+                <div x-show="open" x-transition class="bg-gray-50">
+                    <a href="{{ route('pengumuman') }}"
+                        class="block px-10 py-3 text-sm text-gray-700 hover:bg-gray-100">
+                        Surat Keterangan Aktif Kuliah
+                    </a>
+
+                    <a href="#" class="block px-10 py-3 text-sm text-gray-700 hover:bg-gray-100">
+                        Surat Rekomendasi Penelitian
+                    </a>
+
+                    <a href="#" class="block px-10 py-3 text-sm text-gray-700 hover:bg-gray-100">
+                        Surat Keterangan Lulus
+                    </a>
+                </div>
+            </div>
+
+
+
+            <a href="{{ route('pengumuman') }}" class="block px-6 py-4 text-gray-700 hover:bg-gray-100 border-t">
+                KIP
+            </a>
         </div>
+
     </nav>
 
     <!-- ================= SPACER (ANTI KETUTUP NAV) ================= -->

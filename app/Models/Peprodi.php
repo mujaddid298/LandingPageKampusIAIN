@@ -14,5 +14,10 @@ class Peprodi extends Model
         'image',
     ];
 
+     public function prodi()
+    {
+        return $this->belongsTo(Prodi::class);
+    }
+
 
 }

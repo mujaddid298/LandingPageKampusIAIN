@@ -7,11 +7,13 @@ use App\Models\Pengumuman;
 
 class PengumumanController extends Controller
 {
-    public function index(){
-        $announcements = Pengumuman::latest()
-                ->take(6)
-                ->get();
-        return view('pages.pengumuman',compact('announcements'));
-
+    public function index()
+    {
+        return view('pages.pengumuman.index');
+    }
+    public function show($id)
+    {
+        $pengumuman = Pengumuman::findOrFail($id);
+        return view('pages.pengumuman.show',compact('pengumuman'));
     }
 }

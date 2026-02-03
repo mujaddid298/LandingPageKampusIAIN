@@ -1,4 +1,4 @@
-<div class="bg-white rounded-2xl shadow-md overflow-hidden w-full max-w-xs text-center">
+<div class="bg-white rounded-2xl shadow-md overflow-hidden w-full mx-auto max-w-xs text-center">
     <div class="bg-gray-100 pt-6">
         <img
             src="{{ $image }}"

@@ -1,13 +1,18 @@
 <?php
-
+ 
 use Livewire\Component;
-
-new class extends Component
-{
-    //
+ 
+new class extends Component {
+    public $title = '';
+ 
+    public function save()
+    {
+        // Save logic here...
+    }
 };
 ?>
-
-<div class="p-6 bg-green-500 text-white">
-  Livewire OK
+ 
+<div>
+    <input wire:model="title" type="text">
+    <button wire:click="save">Save Post</button>
 </div>

@@ -3,6 +3,7 @@
 namespace App\Filament\Resources\Peprodis\Schemas;
 
 use Filament\Forms\Components\FileUpload;
+use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Schemas\Schema;
 
@@ -15,8 +16,11 @@ class PeprodiForm
                 TextInput::make('name')
                     ->label('Nama Pengelola Prodi')
                     ->required(),
-                TextInput::make('prodi')
+                Select::make('prodi_id')
                     ->label('Program Studi')
+                    ->relationship('prodi', 'name')
+                    ->searchable()
+                    ->preload()
                     ->required(),
                 TextInput::make('no_wa')
                     ->label('No. WhatsApp')

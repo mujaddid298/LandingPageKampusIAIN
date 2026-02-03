@@ -7,6 +7,7 @@
 @endphp
 
 <section class="py-20 bg-white">
+
     <div class="max-w-7xl mx-auto">
 
 

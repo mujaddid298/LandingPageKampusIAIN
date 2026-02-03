@@ -4,7 +4,6 @@
 
 @section('content')
 
-
-<livewire:database-notifications />
+    <livewire:pengumuman-filter/>
 
 @endsection
