@@ -1,26 +1,26 @@
 @extends('layouts.app')
 
-@section('title', $pengumuman->title . ' | Kampus Melayu')
+@section('title', $kip->title . ' | Kampus Melayu')
 
 @section('content')
     <div class="max-w-4xl mx-auto px-4 mt-20 py-8">
         <div class="bg-white rounded-2xl shadow p-8">
             {{-- Judul --}}
             <h1 class="text-3xl font-bold text-gray-800 mb-4">
-                {{ $pengumuman->title }}
+                {{ $kip->title }}
             </h1>
 
             {{-- Isi --}}
             <div class="prose max-w-none text-gray-700 mb-6">
-                {!! nl2br(e($pengumuman->content)) !!}
+                {!! nl2br(e($kip->content)) !!}
             </div>
 
             {{-- File PDF --}}
-            @if ($pengumuman->file_pdf)
+            @if ($kip->file_pdf)
                 <div class="mt-6">
                     <h2 class="font-semibold text-gray-800 mb-2">Lampiran:</h2>
 
-                    <iframe src="{{ asset('storage/' . $pengumuman->file_pdf) }}#page=1&toolbar=0&navpanes=0"
+                    <iframe src="{{ asset('storage/' . $kip->file_pdf) }}#page=1&toolbar=0&navpanes=0"
                         class="
                         w-full
                         h-[240px] sm:h-[320px] md:h-[420px] lg:h-[520px]
@@ -28,7 +28,7 @@
                     ">
                     </iframe>
 
-                    <a href="{{ asset('storage/' . $pengumuman->file_pdf) }}" download
+                    <a href="{{ asset('storage/' . $kip->file_pdf) }}" download
                         class="
                         inline-flex items-center gap-2
                         px-4 py-2 rounded-lg mt-3

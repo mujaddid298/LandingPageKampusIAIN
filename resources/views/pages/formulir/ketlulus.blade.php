@@ -15,18 +15,21 @@
             margin: 0;
             background: #f3f3f3;
         }
-        
+
         .page {
             font-family: Arial, sans-serif;
             margin: 20px auto;
             width: 210mm;
-            min-height: 297mm;
+            min-height: 250mm;
             padding: 20mm;
             background: white;
             box-sizing: border-box;
         }
 
-        span, li, label, p {
+        span,
+        li,
+        label,
+        p {
             font-size: 12px;
         }
 
@@ -122,150 +125,334 @@
             .btn-container {
                 display: none;
             }
+
             body {
                 background: white;
             }
+        }
+
+
+#formContent {
+    width: 100%;
+}
+
+/* paksa satu halaman A4 */
+.page {
+    page-break-after: avoid;
+    page-break-inside: avoid;
+}
+
+/* cegah pecah section */
+.section,
+.checkbox-group,
+.attachments,
+.signature,
+.note {
+    page-break-inside: avoid;
+}
+
+/* line-height stabil saat canvas render */
+span, p, label, li, input {
+    line-height: 1.25;
+}
+
+/* checkbox jangan membesar */
+input[type="checkbox"] {
+    transform: scale(0.9);
+}
+
+.pdf-hide { display:none !important }
+
+
+
+        /* =========================
+   RESPONSIVE SCREEN MODE
+   ========================= */
+
+        @media screen and (max-width: 768px) {
+
+            .page {
+                width: 100% !important;
+                min-height: auto;
+                margin: 0;
+                padding: 16px;
+                box-shadow: none;
+            }
+
+            h4 {
+                font-size: 13px;
+            }
+
+            span,
+            p,
+            label,
+            li {
+                font-size: 12px;
+            }
+
+            /* field jadi vertikal */
+            .field {
+                flex-direction: column;
+                gap: 2px;
+            }
+
+            .field label {
+                width: auto;
+                font-weight: 600;
+            }
+
+            .field .colon {
+                display: none;
+            }
+
+            input[type="text"] {
+                width: 100%;
+            }
+
+            /* tanda tangan jangan mepet kanan */
+            .signature {
+                justify-content: flex-start;
+            }
+
+            .signature-box {
+                width: 100%;
+                max-width: 320px;
+            }
+
+            /* tombol full width */
+            .btn-container {
+                flex-direction: column;
+            }
+
+            .btn-container button {
+                width: 100%;
+            }
+        }
+
+
+        /* =========================
+   FORCE DESKTOP FOR PDF
+   ========================= */
+
+        .force-desktop .page {
+            width: 210mm !important;
+            min-height: 297mm !important;
+            padding: 20mm !important;
+            margin: 20px auto !important;
+        }
+
+        .force-desktop .field {
+            flex-direction: row !important;
+        }
+
+        .force-desktop .field label {
+            width: 140px !important;
+        }
+
+        .force-desktop .field .colon {
+            display: inline !important;
+        }
+
+        .force-desktop .signature {
+            justify-content: flex-end !important;
+        }
+
+
+        .tanggal-line {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            white-space: nowrap;
         }
     </style>
 </head>
 
 <body>
-<x-navbar />
+    <x-navbar />
 
-<div class="page">
+    <div class="page">
 
-    <div class="btn-container">
-        <button class="btn-download" onclick="downloadForm()">Download Surat (PDF)</button>
-        <button class="btn-reset" onclick="resetForm()">Reset Formulir</button>
+        <div class="btn-container">
+            <h4 style="color: #bb2d3b">
+                * Masukkan data dengan benar, print dan tandatangani, serahkan ke penglola prodi.
+            </h4>
+        </div>
+
+        <div id="formContent">
+
+            <h4>Hal : Permohonan Surat Keterangan Lulus (SKL)</h4>
+
+            <div class="section">
+                <p>Yang bertanda tangan di bawah ini :</p>
+            </div>
+
+            <div class="section">
+                <div class="field">
+                    <label>Nama</label><span class="colon">:</span>
+                    <input type="text" id="nama" placeholder="Masukkan nama lengkap">
+                </div>
+
+                <div class="field">
+                    <label>NIM</label><span class="colon">:</span>
+                    <input type="text" id="nim" placeholder="Masukkan NIM">
+                </div>
+
+                <div class="field">
+                    <label>Tempat, Tanggal Lahir</label><span class="colon">:</span>
+                    <input type="text" placeholder="Contoh: Bengkalis, 10 Januari 2000">
+                </div>
+
+                <div class="field">
+                    <label>Prodi / Jurusan</label><span class="colon">:</span>
+                    <input type="text" placeholder="Masukkan Prodi/Jurusan">
+                </div>
+
+                <div class="field">
+                    <label>Tanggal Yudisium</label><span class="colon">:</span>
+                    <input type="text" placeholder="Contoh: 15 Februari 2026">
+                </div>
+
+                <div class="field">
+                    <label>Alamat</label><span class="colon">:</span>
+                    <input type="text" placeholder="Masukkan alamat lengkap">
+                </div>
+
+                <div class="field">
+                    <label>No. HP</label><span class="colon">:</span>
+                    <input type="text" placeholder="08xxxxxxxxxx">
+                </div>
+            </div>
+
+            <div class="attachments section">
+                <p>Dengan ini mengajukan permohonan untuk diterbitkan Surat Keterangan Lulus.<br>
+                    Bersama ini kami lampirkan persyaratan sebagai berikut :</p>
+
+                <ol>
+                    <li>1. Fotocopy Ijazah Terakhir</li>
+                    <li>2. Pas Foto 3x4 (2 Lembar)</li>
+                    <li>3. Fotocopy Kartu Keluarga</li>
+                    <li>4. Fotocopy KTP</li>
+                    <li>5. Fotocopy Lampiran SK Yudisium</li>
+                </ol>
+            </div>
+
+            <div class="closing">
+                <p>Demikian permohonan ini, atas perhatiannya disampaikan terima kasih.</p>
+            </div>
+
+            <div class="signature">
+                <div class="signature-box">
+                                            <p class="tanggal-line">
+                            <span>Bengkalis,</span>
+                            <input type="text" id="tanggal">
+                        </p>
+
+                    <p>Pemohon</p>
+                    <br><br>
+                    <input type="text" id="nama_ttd" placeholder="Nama Pemohon" style="text-decoration: underline">
+                    <input type="text" id="nim_ttd" placeholder="NIM">
+                </div>
+            </div>
+
+        </div>
+
+        <div class="btn-container mt-10">
+            <button class="btn-download" onclick="downloadForm()">Download Surat (PDF)</button>
+            <button class="btn-reset" onclick="resetForm()">Reset Formulir</button>
+        </div>
     </div>
 
-    <div id="formContent">
+    <x-footer />
 
-        <h4>Hal : Permohonan Surat Keterangan Lulus (SKL)</h4>
-
-        <div class="section">
-            <p>Yang bertanda tangan di bawah ini :</p>
-        </div>
-
-        <div class="section">
-            <div class="field">
-                <label>Nama</label><span class="colon">:</span>
-                <input type="text" id="nama" placeholder="Masukkan nama lengkap">
-            </div>
-
-            <div class="field">
-                <label>NIM</label><span class="colon">:</span>
-                <input type="text" id="nim" placeholder="Masukkan NIM">
-            </div>
-
-            <div class="field">
-                <label>Tempat, Tanggal Lahir</label><span class="colon">:</span>
-                <input type="text" placeholder="Contoh: Bengkalis, 10 Januari 2000">
-            </div>
-
-            <div class="field">
-                <label>Prodi / Jurusan</label><span class="colon">:</span>
-                <input type="text" placeholder="Masukkan Prodi/Jurusan">
-            </div>
-
-            <div class="field">
-                <label>Tanggal Yudisium</label><span class="colon">:</span>
-                <input type="text" placeholder="Contoh: 15 Februari 2026">
-            </div>
-
-            <div class="field">
-                <label>Alamat</label><span class="colon">:</span>
-                <input type="text" placeholder="Masukkan alamat lengkap">
-            </div>
-
-            <div class="field">
-                <label>No. HP</label><span class="colon">:</span>
-                <input type="text" placeholder="08xxxxxxxxxx">
-            </div>
-        </div>
-
-        <div class="attachments section">
-            <p>Dengan ini mengajukan permohonan untuk diterbitkan Surat Keterangan Lulus.<br>
-                Bersama ini kami lampirkan persyaratan sebagai berikut :</p>
-
-            <ol>
-                <li>1. Fotocopy Ijazah Terakhir</li>
-                <li>2. Pas Foto 3x4 (2 Lembar)</li>
-                <li>3. Fotocopy Kartu Keluarga</li>
-                <li>4. Fotocopy KTP</li>
-                <li>5. Fotocopy Lampiran SK Yudisium</li>
-            </ol>
-        </div>
-
-        <div class="closing">
-            <p>Demikian permohonan ini, atas perhatiannya disampaikan terima kasih.</p>
-        </div>
-
-        <div class="signature">
-            <div class="signature-box">
-                <p>Bengkalis, <input type="text" id="tanggal"></p>
-                <p>Pemohon</p>
-                <br><br>
-                <input type="text" id="nama_ttd" placeholder="Nama Pemohon" style="text-decoration: underline">
-                <input type="text" id="nim_ttd" placeholder="NIM">
-            </div>
-        </div>
-
-    </div>
-</div>
-
-<x-footer />
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
-<script>
-    document.getElementById('nama').addEventListener('input', function () {
-        document.getElementById('nama_ttd').value = this.value;
-    });
-
-    document.getElementById('nim').addEventListener('input', function () {
-        document.getElementById('nim_ttd').value = this.value;
-    });
-
-    window.onload = function () {
-        const today = new Date();
-        document.getElementById('tanggal').value =
-            today.toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' });
-    };
-
-    function downloadForm() {
-        const form = document.getElementById('formContent');
-        form.classList.add('pdf-mode');
-
-        const inputs = form.querySelectorAll('input[type="text"]');
-        const replace = [];
-
-        inputs.forEach(input => {
-            const span = document.createElement('span');
-            span.className = 'pdf-text';
-            span.textContent = input.value || ' ';
-            span.style.width = input.offsetWidth + 'px';
-            replace.push({ input, span });
-            input.parentNode.replaceChild(span, input);
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    <script>
+        document.getElementById('nama').addEventListener('input', function() {
+            document.getElementById('nama_ttd').value = this.value;
         });
 
-        html2pdf().set({
-            margin: [30, 20, 20, 20],
-            filename: 'Surat_Keterangan_Lulus.pdf',
-            jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' },
-            html2canvas: { scale: 2 }
-        }).from(form).save().then(() => {
-            replace.forEach(r => r.span.parentNode.replaceChild(r.input, r.span));
-            form.classList.remove('pdf-mode');
+        document.getElementById('nim').addEventListener('input', function() {
+            document.getElementById('nim_ttd').value = this.value;
         });
-    }
 
-    function resetForm() {
-        if (confirm('Kosongkan semua isian?')) {
-            document.querySelectorAll('input[type="text"]').forEach(i => i.value = '');
-            window.onload();
+        window.onload = function() {
+            const today = new Date();
+            const options = {
+                day: 'numeric',
+                month: 'long',
+                year: 'numeric'
+            };
+            const dateString = today.toLocaleDateString('id-ID', options);
+            document.getElementById('tanggal').value = dateString;
+        };
+
+        function downloadForm() {
+
+            document.body.classList.add('force-desktop');
+
+            const form = document.getElementById('formContent');
+            form.classList.add('pdf-mode');
+
+            const inputs = form.querySelectorAll('input[type="text"]');
+            const replacements = [];
+
+            inputs.forEach(input => {
+                const span = document.createElement('span');
+                span.className = 'pdf-text';
+                span.textContent = input.value || ' ';
+
+                const style = window.getComputedStyle(input);
+                span.style.display = 'inline-block';
+                span.style.width = style.width;
+                span.style.borderBottom = style.borderBottom;
+
+                replacements.push({
+                    input,
+                    span
+                });
+                input.parentNode.replaceChild(span, input);
+            });
+
+            html2pdf().set({
+                    margin: [30, 20, 20, 20],
+                    filename: 'Surat_Keterangan_Aktif_Kuliah.pdf',
+                    image: {
+                        type: 'jpeg',
+                        quality: 0.98
+                    },
+                    html2canvas: {
+                        scale: 2,
+                        scrollY: 0
+                    },
+                    jsPDF: {
+                        unit: 'mm',
+                        format: 'a4',
+                        orientation: 'portrait'
+                    }
+                })
+                .from(form)
+                .save()
+                .then(() => {
+
+                    replacements.forEach(({
+                        input,
+                        span
+                    }) => {
+                        span.parentNode.replaceChild(input, span);
+                    });
+
+                    form.classList.remove('pdf-mode');
+                    document.body.classList.remove('force-desktop'); // ← balikin
+                });
         }
-    }
-</script>
+
+        function resetForm() {
+            if (confirm('Kosongkan semua isian?')) {
+                document.querySelectorAll('input[type="text"]').forEach(i => i.value = '');
+                window.onload();
+            }
+        }
+    </script>
 
 </body>
+
 </html>

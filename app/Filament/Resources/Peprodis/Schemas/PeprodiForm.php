@@ -16,12 +16,12 @@ class PeprodiForm
                 TextInput::make('name')
                     ->label('Nama Pengelola Prodi')
                     ->required(),
-                Select::make('prodi_id')
+                Select::make('prodis')
                     ->label('Program Studi')
-                    ->relationship('prodi', 'name')
+                    ->relationship('prodis', 'name')
+                    ->multiple()
                     ->searchable()
-                    ->preload()
-                    ->required(),
+                    ->preload(),
                 TextInput::make('no_wa')
                     ->label('No. WhatsApp')
                     ->required(),

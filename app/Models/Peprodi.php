@@ -9,15 +9,17 @@ class Peprodi extends Model
     protected $table = 'peprodis';
     protected $fillable = [
         'name',
-        'prodi',
         'no_wa',
         'image',
     ];
 
-     public function prodi()
+ public function prodis()
     {
-        return $this->belongsTo(Prodi::class);
+        return $this->belongsToMany(
+            Prodi::class,
+            'peprodi_prodi', // nama pivot table
+            'peprodi_id',
+            'prodi_id'
+        );
     }
-
-
 }

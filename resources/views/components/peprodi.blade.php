@@ -12,7 +12,7 @@
             {{ $name }}
         </h3>
         <p class="text-sm text-gray-500 mb-4">
-            {{ $prodi }}
+            {!! $prodi !!}
         </p>
 
         @if($nowa)

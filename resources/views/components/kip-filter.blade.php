@@ -4,7 +4,7 @@
 <div class="flex flex-row m-10 gap-3">
     <input
         type="text"
-        placeholder="Cari pengumuman..."
+        placeholder="Cari pengumuman Kip kuliah..."
         wire:model.live.debounce.300ms="search"
         class="px-4 py-2 border rounded-lg w-1/2"
     >
@@ -20,7 +20,7 @@
 </div>
 
     <div class="grid md:grid-cols-2 m-10 lg:grid-cols-3 gap-6">
-        @forelse ($announcements as $item)
+        @forelse ($kip as $item)
             <div class="bg-white rounded-xl shadow-lg hover:shadow-xl transition overflow-hidden group">
 
                 {{-- THUMBNAIL --}}
@@ -31,7 +31,7 @@
                             class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105">
                     @else
                         <img
-                            src="https://via.placeholder.com/400x300?text=Pengumuman"
+                            src="https://via.placeholder.com/400x300?text=Kip"
                             class="w-full h-full object-cover">
                     @endif
                 </div>
@@ -52,7 +52,7 @@
                         </span>
 
                         <a
-                            href="{{ route('pengumuman.show', $item->id) }}"
+                            href="{{ route('kip.show', $item->id) }}"
                             class="text-[#E7BB00] font-semibold hover:underline">
                             Lihat →
                         </a>
@@ -61,7 +61,7 @@
             </div>
         @empty
             <div class="col-span-full text-center text-gray-500 py-10">
-                Tidak ada pengumuman ditemukan.
+                Tidak ada pengumuman Kip Kuliah ditemukan.
             </div>
         @endforelse
     </div>

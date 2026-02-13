@@ -103,7 +103,7 @@
 
         {{-- CTA --}}
         <div class="mt-12 text-center">
-            <a href="#"
+            <a href="{{ route('pengumuman') }}"
                class="inline-flex mt-10 items-center gap-2 px-10 py-4 bg-[#12854A] text-white font-bold rounded-3xl shadow-lg hover:-translate-y-0.5 hover:shadow-2xl transition">
                 Lihat Semua Pengumuman
             </a>

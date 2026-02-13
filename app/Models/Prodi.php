@@ -12,8 +12,13 @@ class Prodi extends Model
         'file_pdf'
     ];
 
-     public function peprodi()
+ public function peprodis()
     {
-        return $this->belongsTo(Peprodi::class);
+        return $this->belongsToMany(
+            Peprodi::class,
+            'peprodi_prodi',
+            'prodi_id',
+            'peprodi_id'
+        );
     }
 }

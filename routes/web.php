@@ -29,10 +29,9 @@ Route::get('/formulir/formpenelitian', [FormulirController::class, 'penelitian']
 Route::get('/formulir/ketlulus', [FormulirController::class, 'ketlulus'])->name('formulir.ketlulus');
 
 
-Route::get('/formulir-templates/{id}/download', [FormulirController::class, 'download']);
-
 // Akreditasi
 Route::get('/akreditasi', [AkreditasiController::class, 'index'])->name('akreditasi');
 //Route::get('/akreditasi/download', [AkreditasiController::class, 'download']);
 
-Route::get('/kip', [KipController::class, 'index']);
+Route::get('/kip', [KipController::class, 'index'])->name('page.kip');
+Route::get('/kip/{id}', [KipController::class, 'show'])->name('kip.show');

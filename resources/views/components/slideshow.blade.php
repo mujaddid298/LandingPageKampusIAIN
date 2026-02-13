@@ -1,56 +1,60 @@
-<div x-cloak x-data="{
-    current: 0,
-    slides: [{
-            title: 'Website Kampus Modern',
-            desc: 'Informasi akademik terintegrasi',
-            image: '{{ url('images/1.jpg') }}'
-
+<div x-cloak
+    x-data="{
+        current: 0,
+        slides: @js($slideshow->map(fn($s) => [
+            'image' => asset('storage/' . $s->image)
+        ])),
+        next() {
+            this.current = (this.current + 1) % this.slides.length
         },
-        {
-            title: 'Sistem Informasi Terpadu',
-            desc: 'Mudah, cepat, dan efisien',
-            image: '{{ url('images/2.jpg') }}'
-
-        },
-        {
-            title: 'Akreditasi & Prestasi',
-            desc: 'Kampus unggul dan berdaya saing',
-            image: '{{ url('images/3.jpg') }}'
-
+        prev() {
+            this.current = (this.current - 1 + this.slides.length) % this.slides.length
         }
-    ]
-}" x-init="$nextTick(() => {
-    setInterval(() => {
-        current = (current + 1) % slides.length
-    }, 4000)
-})"
+    }"
+    x-init="$nextTick(() => {
+        setInterval(() => {
+            next()
+        }, 6000)
+    })"
     class="relative w-full
            h-[70vh] sm:h-[75vh] md:h-[85vh] lg:h-screen
-           overflow-hidden">
-    <template x-for="(slide, index) in slides" :key="index">
-        <template x-if="current === index">
-            <div class="absolute inset-0 bg-cover bg-center transition-opacity duration-700"
-                :style="`background-image: url('${slide.image}')`">
-                <!-- Overlay -->
-                <div class="w-full h-full bg-black/60
-                           flex items-center">
-                    <!-- Content -->
-                    <div
-                        class="text-white
-                               max-w-xl
-                               px-6 sm:px-10 md:px-16">
-                        <h1 class="font-bold
-                                   text-2xl sm:text-3xl md:text-4xl lg:text-5xl
-                                   mb-3 md:mb-4"
-                            x-text="slide.title"></h1>
+           overflow-hidden
+           group">
 
-                        <p class="text-sm sm:text-base md:text-lg lg:text-xl
-                                   leading-relaxed"
-                            x-text="slide.desc"></p>
-                    </div>
-                </div>
-            </div>
-        </template>
+    <!-- Slides -->
+    <template x-for="(slide, index) in slides" :key="index">
+        <div x-show="current === index"
+            x-transition:enter="transition-opacity duration-700"
+            x-transition:enter-start="opacity-0"
+            x-transition:enter-end="opacity-100"
+            x-transition:leave="transition-opacity duration-700"
+            x-transition:leave-start="opacity-100"
+            x-transition:leave-end="opacity-0"
+            class="absolute inset-0 bg-cover bg-center"
+            :style="`background-image: url('${slide.image}')`">
+            
+            <div class="w-full h-full bg-black/20"></div>
+        </div>
     </template>
+
+    <!-- Left Arrow -->
+    <button @click="prev()"
+        class="absolute left-5 top-1/2 -translate-y-1/2
+               bg-white/20 backdrop-blur-sm
+               text-white p-3 rounded-full
+               opacity-0 group-hover:opacity-100
+               transition duration-300">
+        &#10094;
+    </button>
+
+    <!-- Right Arrow -->
+    <button @click="next()"
+        class="absolute right-5 top-1/2 -translate-y-1/2
+               bg-white/20 backdrop-blur-sm
+               text-white p-3 rounded-full
+               opacity-0 group-hover:opacity-100
+               transition duration-300">
+        &#10095;
+    </button>
 
 </div>

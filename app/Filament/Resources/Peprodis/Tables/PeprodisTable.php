@@ -17,10 +17,12 @@ class PeprodisTable
             ->columns([
                 TextColumn::make('name')
                     ->searchable(),
-                TextColumn::make('Prodi')
-                    ->searchable(),
                 TextColumn::make('no_wa')
                     ->searchable(),
+                TextColumn::make('prodis.name')
+                    ->label('Program Studi')
+                    ->badge()
+                    ->separator(', '),
                 ImageColumn::make('image'),
                 TextColumn::make('created_at')
                     ->dateTime()

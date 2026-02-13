@@ -11,19 +11,21 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('sejarahs', function (Blueprint $table) {
+        Schema::create('kips', function (Blueprint $table) {
             $table->id();
-            $table->string('judul');
-            $table->longText('konten');
+            $table->string('title');
+            $table->text('content');
+            $table->string('file_pdf')->nullable();
+            $table->string('thumbnail')->nullable();
             $table->timestamps();
         });
-            }
+    }
 
     /**
      * Reverse the migrations.
      */
     public function down(): void
     {
-        Schema::dropIfExists('sejarahs');
+        //
     }
 };

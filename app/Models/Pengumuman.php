@@ -16,12 +16,12 @@ class Pengumuman extends Model
     protected $fillable = [
         'title',
         'content',
-        'document',
+        'file_pdf',
         'thumbnail',
     ];
 
         protected $casts = [
-        'document' => 'array',
+        'file_pdf' => 'array',
         'created_at' => 'datetime',
     ];
 

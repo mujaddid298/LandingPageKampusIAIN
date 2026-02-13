@@ -1,24 +1,23 @@
 <?php
 
-namespace App\Filament\Resources\Sejarahs\Tables;
+namespace App\Filament\Resources\Slideshows\Tables;
 
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
+use Filament\Tables\Columns\ImageColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 
-class SejarahsTable
+class SlideshowsTable
 {
     public static function configure(Table $table): Table
     {
         return $table
             ->columns([
-                TextColumn::make('judul')
+                TextColumn::make('title')
                     ->searchable(),
-                TextColumn::make('konten')
-                    ->searchable()
-                    ->limit(50),
+                ImageColumn::make('image'),
                 TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()

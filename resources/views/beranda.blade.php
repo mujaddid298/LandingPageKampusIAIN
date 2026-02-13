@@ -73,7 +73,7 @@
 
     <!-- ================= SLIDESHOW ================= -->
 
-    <x-slideshow />
+    <x-slideshow :slideshow="$slideshow" />
 
     <!-- ================= SEJARAH ================= -->
 
@@ -107,10 +107,9 @@
             lg:grid-cols-4
             justify-items-center">
 
-
                 @foreach ($peprodi as $item)
-                    <x-peprodi name="{{ $item->name }}" prodi="{{ $item->prodi }}" nowa="{{ $item->no_wa }}"
-                        image="{{ asset('storage/' . $item->image) }}" />
+                    <x-peprodi name="{{ $item->name }}" prodi="{{ $item->prodis->pluck('name')->implode(', ') }}"
+                        nowa="{{ $item->no_wa }}" image="{{ asset('storage/' . $item->image) }}" />
                 @endforeach
 
             </div>

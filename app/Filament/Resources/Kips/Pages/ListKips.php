@@ -1,14 +1,14 @@
 <?php
 
-namespace App\Filament\Resources\Sejarahs\Pages;
+namespace App\Filament\Resources\Kips\Pages;
 
-use App\Filament\Resources\Sejarahs\SejarahResource;
+use App\Filament\Resources\Kips\KipResource;
 use Filament\Actions\CreateAction;
 use Filament\Resources\Pages\ListRecords;
 
-class ListSejarahs extends ListRecords
+class ListKips extends ListRecords
 {
-    protected static string $resource = SejarahResource::class;
+    protected static string $resource = KipResource::class;
 
     protected function getHeaderActions(): array
     {

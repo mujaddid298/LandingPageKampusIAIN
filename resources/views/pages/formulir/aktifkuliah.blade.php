@@ -19,8 +19,8 @@
             margin: 0;
             background: #f3f3f3;
         }
-        
-        
+
+
         .page {
             font-family: Arial, sans-serif;
             justify-content: center;
@@ -140,6 +140,12 @@
                 background: white !important;
             }
 
+            .page {
+                width: 210mm;
+                padding: 20mm;
+            }
+
+
             .btn-container {
                 display: none;
             }
@@ -201,6 +207,145 @@
             background: #bb2d3b;
             transform: translateY(-1px);
         }
+
+        /* ==== PDF STABILITY FIX ==== */
+        #formContent {
+            width: 100%;
+        }
+
+        /* paksa satu halaman A4 */
+        .page {
+            page-break-after: avoid;
+            page-break-inside: avoid;
+        }
+
+        /* cegah pecah section */
+        .section,
+        .checkbox-group,
+        .attachments,
+        .signature,
+        .note {
+            page-break-inside: avoid;
+        }
+
+        /* line-height stabil saat canvas render */
+        span,
+        p,
+        label,
+        li,
+        input {
+            line-height: 1.25;
+        }
+
+        /* checkbox jangan membesar */
+        input[type="checkbox"] {
+            transform: scale(0.9);
+        }
+
+        .pdf-hide {
+            display: none !important
+        }
+
+
+        /* =========================
+   RESPONSIVE SCREEN MODE
+   ========================= */
+
+        @media screen and (max-width: 768px) {
+
+            .page {
+                width: 100% !important;
+                min-height: auto;
+                margin: 0;
+                padding: 16px;
+                box-shadow: none;
+            }
+
+            h4 {
+                font-size: 13px;
+            }
+
+            span,
+            p,
+            label,
+            li {
+                font-size: 12px;
+            }
+
+            /* field jadi vertikal */
+            .field {
+                flex-direction: column;
+                gap: 2px;
+            }
+
+            .field label {
+                width: auto;
+                font-weight: 600;
+            }
+
+            .field .colon {
+                display: none;
+            }
+
+            input[type="text"] {
+                width: 100%;
+            }
+
+            /* tanda tangan jangan mepet kanan */
+            .signature {
+                justify-content: flex-start;
+            }
+
+            .signature-box {
+                width: 100%;
+                max-width: 320px;
+            }
+
+            /* tombol full width */
+            .btn-container {
+                flex-direction: column;
+            }
+
+            .btn-container button {
+                width: 100%;
+            }
+        }
+
+
+        /* =========================
+   FORCE DESKTOP FOR PDF
+   ========================= */
+
+        .force-desktop .page {
+            width: 210mm !important;
+            min-height: 297mm !important;
+            padding: 20mm !important;
+            margin: 20px auto !important;
+        }
+
+        .force-desktop .field {
+            flex-direction: row !important;
+        }
+
+        .force-desktop .field label {
+            width: 140px !important;
+        }
+
+        .force-desktop .field .colon {
+            display: inline !important;
+        }
+
+        .force-desktop .signature {
+            justify-content: flex-end !important;
+        }
+
+
+        .tanggal-line {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            white-space: nowrap;
+        }
     </style>
 
 </head>
@@ -210,8 +355,10 @@
     <div class="page">
 
         <div class="btn-container">
-            <button class="btn-download" onclick="downloadForm()">Download Surat (PDF)</button>
-            <button class="btn-reset" onclick="resetForm()">Reset Formulir</button>
+
+            <h4 style="color: #bb2d3b">
+                * Masukkan data dengan benar, print dan tandatangani, serahkan ke penglola prodi.
+            </h4>
         </div>
 
         <div id="formContent">
@@ -315,7 +462,11 @@
                 <div class="signature-box">
                     <div class="signature-fields">
 
-                        <p>Bengkalis, <input type="text" id="tanggal"></p>
+                        <p class="tanggal-line">
+                            <span>Bengkalis,</span>
+                            <input type="text" id="tanggal">
+                        </p>
+
                         <p>Pemohon</p>
                     </div>
                     <br><br>
@@ -334,6 +485,12 @@
                 <p><strong>Catatan :</strong><br>
                     * <em>Ceklis pada surat keterangan yang diminat</em></p>
             </div>
+        </div>
+
+        <div class="btn-container mt-10">
+            <button class="btn-download" onclick="downloadForm()">Download Surat (PDF)</button>
+            <button class="btn-reset" onclick="resetForm()">Reset Formulir</button>
+
         </div>
     </div>
     <x-footer />
@@ -361,6 +518,9 @@
         };
 
         function downloadForm() {
+
+            document.body.classList.add('force-desktop');
+
             const form = document.getElementById('formContent');
             form.classList.add('pdf-mode');
 
@@ -371,7 +531,11 @@
                 const span = document.createElement('span');
                 span.className = 'pdf-text';
                 span.textContent = input.value || ' ';
-                span.style.width = input.offsetWidth + 'px';
+
+                const style = window.getComputedStyle(input);
+                span.style.display = 'inline-block';
+                span.style.width = style.width;
+                span.style.borderBottom = style.borderBottom;
 
                 replacements.push({
                     input,
@@ -381,27 +545,38 @@
             });
 
             html2pdf().set({
-                margin: [30, 20, 20, 20], // top, left, bottom, right (mm)
-                filename: 'Surat_Keterangan_Aktif_Kuliah.pdf',
-                jsPDF: {
-                    unit: 'mm',
-                    format: 'a4',
-                    orientation: 'portrait'
-                },
-                html2canvas: {
-                    scale: 2
-                }
-            }).from(form).save().then(() => {
-                // restore input
-                replacements.forEach(({
-                    input,
-                    span
-                }) => {
-                    span.parentNode.replaceChild(input, span);
+                    margin: [30, 19, 20, 19],
+                    filename: 'Surat_Keterangan_Aktif_Kuliah.pdf',
+                    image: {
+                        type: 'jpeg',
+                        quality: 0.98
+                    },
+                    html2canvas: {
+                        scale: 2,
+                        scrollY: 0
+                    },
+                    jsPDF: {
+                        unit: 'mm',
+                        format: 'a4',
+                        orientation: 'portrait'
+                    }
+                })
+                .from(form)
+                .save()
+                .then(() => {
+
+                    replacements.forEach(({
+                        input,
+                        span
+                    }) => {
+                        span.parentNode.replaceChild(input, span);
+                    });
+
+                    form.classList.remove('pdf-mode');
+                    document.body.classList.remove('force-desktop'); // ← balikin
                 });
-                form.classList.remove('pdf-mode');
-            });
         }
+
 
         function resetForm() {
             if (confirm('Apakah Anda yakin ingin mengosongkan semua isian formulir?')) {

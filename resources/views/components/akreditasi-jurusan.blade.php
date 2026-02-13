@@ -37,7 +37,7 @@
         </div>
     </section>
 
- 
+
     <div
         class="mt-8 sm:mt-10 flex flex-col items-center justify-center
             rounded-2xl p-8 sm:p-12 text-center">
@@ -69,10 +69,10 @@
     {{-- DETAIL PRODI --}}
     @if ($selectedDept)
         <section wire:loading.remove wire:target="selectDepartment"
-            class="mt-8 sm:mt-10 bg-white rounded-2xl shadow p-6 sm:p-8">
+            class="mt- sm:mt-10 bg-white rounded-2xl shadow p-6 sm:p-8">
             <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-6">
                 <h2 class="text-xl sm:text-2xl font-semibold text-slate-800">
-                    {{ $selectedDept->name }}
+                    Akreditasi {{ $selectedDept->name }}
                 </h2>
 
             </div>
@@ -90,16 +90,31 @@
                     File akreditasi belum tersedia
                 </div>
             @endif
+
+            @if ($selectedDept->file_pdf)
+                <a
+                    href="{{ asset('storage/' . $selectedDept->file_pdf) }}"
+                    download
+                    class="
+                        inline-flex items-center gap-2
+                        px-4 py-2 rounded-lg mt-3
+                        bg-[#12854A] text-white
+                        text-sm font-semibold
+                        hover:bg-[#0f6b3c]
+                        transition
+                    ">
+                    <!-- icon -->
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none"
+                        viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M12 4v12m0 0l-4-4m4 4l4-4M4 16v2a2 2 0 002 2h12a2 2 0 002-2v-2" />
+                    </svg>
+                    Download PDF
+                </a>
+            @endif
         </section>
     @else
-        <div
-            class="mt-8 sm:mt-10 flex flex-col items-center justify-center
-            rounded-2xl border-2 border-dashed border-slate-300
-            bg-slate-50 p-8 sm:p-12 text-center">
-
-            <p class="text-slate-600 text-base sm:text-lg">
-                Pilih program studi untuk melihat informasi akreditasi
-            </p>
+        <div>
         </div>
     @endif
 

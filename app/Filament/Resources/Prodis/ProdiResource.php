@@ -18,7 +18,7 @@ class ProdiResource extends Resource
 {
     protected static ?string $model = Prodi::class;
 
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedBookmark;
+    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedAcademicCap;
 
     protected static ?string $recordTitleAttribute = 'name';
     // protected static ?string $modelLabel = 'Pengumuman'; // Label singular

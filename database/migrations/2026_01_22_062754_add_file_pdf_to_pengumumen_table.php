@@ -16,7 +16,7 @@ return new class extends Migration
 public function down(): void
 {
     Schema::table('pengumumen', function (Blueprint $table) {
-        $table->dropColumn('document');
+        $table->dropColumn('file_pdf');
     });
 }
 
