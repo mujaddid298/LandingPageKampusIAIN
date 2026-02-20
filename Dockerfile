@@ -1,6 +1,4 @@
-# =============================
-# Stage 1: Build Dependencies
-# =============================
+# Stage 1
 FROM composer:2 AS vendor
 
 WORKDIR /app
@@ -13,14 +11,10 @@ RUN composer install \
     --prefer-dist \
     --optimize-autoloader
 
-# =============================
-# Stage 2: PHP Runtime
-# =============================
+# Stage 2
 FROM php:8.3.16-fpm-alpine
 
-# Install system deps
 RUN apk add --no-cache \
-    bash \
     libpng-dev \
     libzip-dev \
     oniguruma-dev \
@@ -36,16 +30,11 @@ RUN apk add --no-cache \
 
 WORKDIR /var/www
 
-# Copy app source
 COPY . .
-
-# Copy vendor dari stage 1
 COPY --from=vendor /app/vendor ./vendor
 
-# Permission
 RUN chown -R www-data:www-data storage bootstrap/cache
 
-# Optimize Laravel
 RUN php artisan config:cache \
     && php artisan route:cache \
     && php artisan view:cache
